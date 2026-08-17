@@ -14,6 +14,16 @@ export default {
     },
     extend: {
       colors: {
+        "ink-900": "#0F2851",
+        "ink-700": "#1B3A6B",
+        "steel-600": "#2F5C8C",
+        "steel-500": "#4A78B4",
+        "mist-50": "#F2F6FB",
+        "mist-100": "#DCE8F3",
+        "copper-600": "#A85A1A",
+        "copper-400": "#D98A3D",
+        porcelain: "#F6F1EA",
+        "neutral-600": "#5B6B82",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -59,9 +69,10 @@ export default {
         },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        sm: "8px",
+        md: "16px",
+        lg: "24px",
+        full: "9999px",
       },
       keyframes: {
         "accordion-down": {
