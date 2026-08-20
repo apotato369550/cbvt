@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import {
   ArrowUpRight,
   BadgeCheck,
@@ -29,10 +29,35 @@ const services = [
 ];
 
 const brands = ["Koppel", "Carrier", "Daikin", "Samsung", "Panasonic"];
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xeajvdly";
 
 export default function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
+
+  async function handleContactSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setSubmitting(true);
+    setSubmitError(false);
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: new FormData(event.currentTarget),
+        headers: { Accept: "application/json" },
+      });
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(true);
+      }
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   return (
     <main className="min-h-screen overflow-hidden bg-mist-50 text-ink-900">
@@ -80,7 +105,7 @@ export default function Index() {
 
       <section id="about" className="bg-white py-24 sm:py-28"><div className="mx-auto max-w-[1240px] px-5 sm:px-8 lg:px-12"><div className="rounded-md bg-ink-900 px-7 py-12 text-white sm:px-14 sm:py-16 lg:flex lg:items-center lg:justify-between lg:px-20"><div><p className="eyebrow text-copper-400">Serving Cebu with pride</p><h2 className="mt-3 max-w-2xl font-display text-4xl font-bold leading-none sm:text-5xl">Comfortable spaces make<br /><span className="text-copper-400">better days.</span></h2></div><div className="mt-8 max-w-sm lg:mt-0"><p className="text-sm leading-relaxed text-white/65">Cebu Best Value Trading Corporation is your local partner for air-conditioning, ventilation, and general technical services. We work hard so you can focus on what matters.</p><a href="#contact" className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-copper-400 hover:text-copper-300">Start a conversation <ArrowUpRight size={16} /></a></div></div></div></section>
 
-      <section id="contact" className="bg-mist-100 py-24 sm:py-32"><div className="mx-auto grid max-w-[1240px] gap-12 px-5 sm:px-8 lg:grid-cols-[.8fr_1.2fr] lg:gap-24 lg:px-12"><div><p className="eyebrow">Let's get to work</p><h2 className="mt-3 font-display text-5xl font-bold leading-none tracking-tight sm:text-6xl">Need a hand<br /><span className="text-steel-500">with your HVAC?</span></h2><p className="mt-6 max-w-sm leading-relaxed text-neutral-600">Tell us what you need and our team will get back to you as soon as possible.</p><div className="mt-10 space-y-4 text-sm"><div className="flex items-start gap-3"><span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-copper-600"><Phone size={16} strokeWidth={1.6} /></span><div className="flex flex-col gap-1 font-semibold text-ink-900"><a href="tel:+639171622168" className="hover:text-copper-600">Globe Telecom: (63) 917 162 2168</a><a href="tel:+639228847888" className="hover:text-copper-600">Sun Telecom: (63) 922 884 7888</a></div></div><a href="mailto:cbvt_1234@yahoo.com.ph" className="flex items-center gap-3 font-semibold text-ink-900 hover:text-copper-600"><span className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-copper-600"><Mail size={16} strokeWidth={1.6} /></span>cbvt_1234@yahoo.com.ph</a><span className="flex items-center gap-3 text-neutral-600"><span className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-copper-600"><MapPin size={16} strokeWidth={1.6} /></span>Cebu City, Cebu, Philippines</span></div></div><div className="rounded-md bg-white p-6 shadow-xl shadow-ink-900/5 sm:p-9">{submitted ? <div className="flex min-h-[350px] flex-col items-center justify-center text-center"><div className="flex h-14 w-14 items-center justify-center rounded-full bg-mist-100 text-steel-600"><Check size={27} /></div><h3 className="mt-5 font-display text-3xl font-semibold">Message received.</h3><p className="mt-2 max-w-sm text-sm text-neutral-600">Thanks for reaching out. Our team will be in touch shortly.</p></div> : <form onSubmit={(event) => { event.preventDefault(); setSubmitted(true); }} className="grid gap-5"><div className="grid gap-5 sm:grid-cols-2"><label className="field-label">Your name<input required placeholder="Juan Dela Cruz" /></label><label className="field-label">Phone number<input required placeholder="09XX XXX XXXX" /></label></div><label className="field-label">What can we help with?<select defaultValue=""><option value="" disabled>Select a service</option>{services.map((service) => <option key={service.title}>{service.title}</option>)}<option>Sales / Product inquiry</option></select></label><label className="field-label">Message<textarea required placeholder="Tell us a little about your project..." rows={4} /></label><button type="submit" className="mt-1 inline-flex items-center justify-center gap-2 rounded-full bg-copper-600 px-6 py-4 text-sm font-bold text-white transition hover:bg-copper-400">Send message <ArrowUpRight size={16} /></button></form>}</div></div></section>
+      <section id="contact" className="bg-mist-100 py-24 sm:py-32"><div className="mx-auto grid max-w-[1240px] gap-12 px-5 sm:px-8 lg:grid-cols-[.8fr_1.2fr] lg:gap-24 lg:px-12"><div><p className="eyebrow">Let's get to work</p><h2 className="mt-3 font-display text-5xl font-bold leading-none tracking-tight sm:text-6xl">Need a hand<br /><span className="text-steel-500">with your HVAC?</span></h2><p className="mt-6 max-w-sm leading-relaxed text-neutral-600">Tell us what you need and our team will get back to you as soon as possible.</p><div className="mt-10 space-y-4 text-sm"><div className="flex items-start gap-3"><span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-copper-600"><Phone size={16} strokeWidth={1.6} /></span><div className="flex flex-col gap-1 font-semibold text-ink-900"><a href="tel:+639171622168" className="hover:text-copper-600">Globe Telecom: (63) 917 162 2168</a><a href="tel:+639228847888" className="hover:text-copper-600">Sun Telecom: (63) 922 884 7888</a></div></div><a href="mailto:cbvt_1234@yahoo.com.ph" className="flex items-center gap-3 font-semibold text-ink-900 hover:text-copper-600"><span className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-copper-600"><Mail size={16} strokeWidth={1.6} /></span>cbvt_1234@yahoo.com.ph</a><span className="flex items-center gap-3 text-neutral-600"><span className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-copper-600"><MapPin size={16} strokeWidth={1.6} /></span>Cebu City, Cebu, Philippines</span></div></div><div className="rounded-md bg-white p-6 shadow-xl shadow-ink-900/5 sm:p-9">{submitted ? <div className="flex min-h-[350px] flex-col items-center justify-center text-center"><div className="flex h-14 w-14 items-center justify-center rounded-full bg-mist-100 text-steel-600"><Check size={27} /></div><h3 className="mt-5 font-display text-3xl font-semibold">Message received.</h3><p className="mt-2 max-w-sm text-sm text-neutral-600">Thanks for reaching out. Our team will be in touch shortly.</p></div> : <form onSubmit={handleContactSubmit} className="grid gap-5"><input type="hidden" name="_subject" value="New contact form submission — CBVT website" /><div className="grid gap-5 sm:grid-cols-2"><label className="field-label">Your name<input required name="name" placeholder="Juan Dela Cruz" /></label><label className="field-label">Phone number<input required name="phone" placeholder="09XX XXX XXXX" /></label></div><label className="field-label">What can we help with?<select required name="service" defaultValue=""><option value="" disabled>Select a service</option>{services.map((service) => <option key={service.title}>{service.title}</option>)}<option>Sales / Product inquiry</option></select></label><label className="field-label">Message<textarea required name="message" placeholder="Tell us a little about your project..." rows={4} /></label>{submitError && <p className="text-sm font-semibold text-red-600">Something went wrong sending your message. Please try again, or call us directly.</p>}<button type="submit" disabled={submitting} className="mt-1 inline-flex items-center justify-center gap-2 rounded-full bg-copper-600 px-6 py-4 text-sm font-bold text-white transition hover:bg-copper-400 disabled:cursor-not-allowed disabled:opacity-60">{submitting ? "Sending..." : "Send message"} <ArrowUpRight size={16} /></button></form>}</div></div></section>
 
       <footer className="bg-ink-900 px-5 py-10 text-white sm:px-8 lg:px-12"><div className="mx-auto flex max-w-[1240px] flex-col justify-between gap-6 sm:flex-row sm:items-center"><div className="flex items-center gap-2.5"><span className="flex h-8 w-8 items-center justify-center rounded-full bg-porcelain p-1.5"><img src="/logo.svg" alt="CBVT logo" className="h-full w-full" /></span><span className="font-display text-lg font-bold tracking-wide"><span className="sm:hidden">CBVT<span className="text-copper-400">.</span></span><span className="hidden sm:inline">Cebu Best Value Trading<span className="text-copper-400">.</span></span></span></div><p className="text-xs text-white/45">© 2025 Cebu Best Value Trading Corporation · Cebu City, Cebu, PH</p><a href="#top" className="flex items-center gap-2 text-xs font-semibold text-white/65 hover:text-white">Back to top <ChevronDown className="rotate-180" size={15} /></a></div></footer>
     </main>
