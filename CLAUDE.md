@@ -13,13 +13,10 @@ Marketing site for an HVAC/general-services trading company in Cebu City, PH. Bu
 The logo pipeline goes source art → vector → generated icons, each step scripted so a future logo swap doesn't mean ad hoc image editing:
 
 1. `public/new_logo.png` — original source art (drop a replacement here to update the brand mark).
-2. `node scripts/vectorize-logo.mjs` — traces the source PNG into two outputs via `potrace`, snapping colors to the exact brand hex (Ink 900 / Copper 600):
-   - `public/logo.svg` — the two-tone mark, transparent background.
-   - `client/components/icons/LogoSilhouette.tsx` — a single-color (`currentColor`) union-shape version, for contexts that need to tint/fade the mark as one flat color (e.g. a low-opacity watermark) rather than its true two-tone colors.
-   Rerun only when `new_logo.png` changes.
+2. `node scripts/vectorize-logo.mjs` — traces the source PNG into `public/logo.svg` via `potrace`, snapping colors to the exact brand hex (Ink 900 / Copper 600), transparent background. Rerun only when `new_logo.png` changes.
 3. `node scripts/generate-favicons.mjs` — regenerates every favicon/app-icon file (`icon-16/32/48/192/512.png`, `apple-touch-icon.png`, `favicon.ico`, `favicon.svg`) from `public/logo.svg`, composited onto a Porcelain rounded-square backing so the navy mark stays legible at tab-icon sizes. Rerun after step 2.
 
-`public/logo.svg` is used directly in-app (`<img src="/logo.svg">`) in the nav badge and footer badge in `Index.tsx`. `LogoSilhouette` is used for the "Why CBVT" panel's low-opacity watermark texture, the one spot that needs a single tintable color instead of the mark's real colors.
+`public/logo.svg` is used directly in-app (`<img src="/logo.svg">`) everywhere the mark appears in `Index.tsx` — the nav badge, footer badge, and the "Why CBVT" panel. Because the mark's navy fill is the exact Ink 900 used on nav/footer/panel backgrounds, every one of those placements wraps it in a light (Porcelain) backing plate so it doesn't disappear into the background — don't drop that wrapper when touching those spots.
 
 ## Commands
 
