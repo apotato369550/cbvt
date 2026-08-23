@@ -18,6 +18,8 @@ The logo pipeline goes source art → vector → generated icons, each step scri
 
 `public/logo.svg` is used directly in-app (`<img src="/logo.svg">`) everywhere the mark appears in `Index.tsx` — the nav badge, footer badge, and the "Why CBVT" panel. Because the mark's navy fill is the exact Ink 900 used on nav/footer/panel backgrounds, every one of those placements wraps it in a light (Porcelain) backing plate so it doesn't disappear into the background — don't drop that wrapper when touching those spots.
 
+`public/brands/` holds third-party partner logos (Koppel, Carrier, Daikin, Samsung, Panasonic, Matrix) used in the "Trusted equipment partners" marquee — these are official brand assets sourced as-is, unrelated to the CBVT logo pipeline above.
+
 ## Commands
 
 ```bash
