@@ -27,13 +27,13 @@ import {
 } from "lucide-react";
 
 const services = [
-  { icon: Fan, title: "Aircon Repair", text: "Fast, careful diagnostics for split-type, window, and commercial units." },
-  { icon: Snowflake, title: "Aircon Installation", text: "Properly sized and neatly installed systems built for Cebu weather." },
-  { icon: Sparkles, title: "General Cleaning", text: "Deep cleaning that keeps your aircon fresh, efficient, and healthy." },
-  { icon: Wrench, title: "Airduct Installation", text: "Reliable ductwork for balanced, comfortable airflow in every space." },
-  { icon: Hammer, title: "Exhaust Duct", text: "Purpose-built exhaust solutions for kitchens, shops, and facilities." },
-  { icon: Zap, title: "Motor Rewinding", text: "Expert rewinding for all kinds of motors, with lasting performance." },
-  { icon: Droplets, title: "Chilled Water Installation", text: "Chilled water systems designed and installed for large-scale cooling needs." },
+  { icon: Fan, title: "Aircon Repair", text: "Fast, careful diagnostics for split-type, window, and commercial units.", image: "https://images.pexels.com/photos/33671149/pexels-photo-33671149.jpeg" },
+  { icon: Snowflake, title: "Aircon Installation", text: "Properly sized and neatly installed systems built for Cebu weather.", image: "https://images.pexels.com/photos/24828656/pexels-photo-24828656.jpeg" },
+  { icon: Sparkles, title: "General Cleaning", text: "Deep cleaning that keeps your aircon fresh, efficient, and healthy.", image: "https://images.pexels.com/photos/18885426/pexels-photo-18885426.jpeg" },
+  { icon: Wrench, title: "Airduct Installation", text: "Reliable ductwork for balanced, comfortable airflow in every space.", image: "https://images.pexels.com/photos/7340508/pexels-photo-7340508.jpeg" },
+  { icon: Hammer, title: "Exhaust Duct", text: "Purpose-built exhaust solutions for kitchens, shops, and facilities.", image: "https://images.pexels.com/photos/3421636/pexels-photo-3421636.jpeg" },
+  { icon: Zap, title: "Motor Rewinding", text: "Expert rewinding for all kinds of motors, with lasting performance.", image: "https://images.pexels.com/photos/13287446/pexels-photo-13287446.jpeg" },
+  { icon: Droplets, title: "Chilled Water Installation", text: "Chilled water systems designed and installed for large-scale cooling needs.", image: "https://images.pexels.com/photos/29248902/pexels-photo-29248902.jpeg" },
 ];
 
 const brands = [
@@ -43,15 +43,6 @@ const brands = [
   { name: "Matrix", logo: "/brands/matrix.jpg" },
 ];
 
-const galleryPhotos = [
-  "/carousel/install-01.jpg",
-  "/carousel/install-02.jpg",
-  "/carousel/install-03.jpg",
-  "/carousel/install-04.jpg",
-  "/carousel/install-05.jpg",
-  "/carousel/install-06.jpg",
-  "/carousel/install-07.jpg",
-];
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xeajvdly";
 
 export default function Index() {
@@ -111,7 +102,7 @@ export default function Index() {
         <div className="relative mx-auto w-full max-w-[1240px] px-5 sm:px-8 lg:px-12">
           <div className="max-w-3xl">
             <div className="mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[.22em] text-copper-400"><span className="h-px w-8 bg-copper-400" />Cebu City's HVAC &amp; motor rewinding specialists</div>
-            <h1 className="max-w-3xl font-display text-6xl font-bold leading-[.92] tracking-tight text-white sm:text-7xl lg:text-[88px]">Cebu Best Value<br /><span className="text-copper-400">Trading.</span></h1>
+            <h1 className="max-w-3xl font-display text-6xl font-bold leading-[.92] tracking-tight text-white sm:text-7xl lg:text-[88px]">Cebu Best Value<br /><span className="text-copper-400">Trading Corporation.</span></h1>
             <p className="mt-3 text-sm font-semibold uppercase tracking-[.14em] text-white/60 sm:text-base">The HVAC Division of Cebu Best Value Trading Corporation.</p>
             <p className="mt-4 font-display text-2xl font-semibold text-white/85 sm:text-3xl">Comfort that works for you.</p>
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/75 sm:text-xl">From reliable aircon service to complete HVAC solutions, CBVT keeps homes, businesses, and facilities in Cebu cool, clean, and running right.</p>
@@ -123,9 +114,38 @@ export default function Index() {
 
       <section className="border-b border-border bg-white py-10"><div className="mx-auto max-w-[1240px] px-5 sm:px-8 lg:px-12"><p className="text-xs font-semibold uppercase tracking-[.16em] text-neutral-600">Trusted equipment partners</p><div className="relative mt-6 overflow-hidden [-webkit-mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)] [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"><div className="flex w-max items-center gap-12 motion-safe:animate-marquee hover:[animation-play-state:paused] sm:gap-16">{[...brands, ...brands].map((brand, i) => <img key={brand.name + i} src={brand.logo} alt={brand.name} className={brand.name === "Matrix" ? "h-14 w-auto shrink-0 object-contain sm:h-16" : "h-8 w-auto shrink-0 object-contain sm:h-9"} />)}</div></div></div></section>
 
-      <section id="services" className="bg-mist-50 py-24 sm:py-32"><div className="mx-auto max-w-[1240px] px-5 sm:px-8 lg:px-12"><div className="flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p className="eyebrow">What we do</p><h2 className="mt-3 max-w-xl font-display text-5xl font-bold leading-none tracking-tight sm:text-6xl">Seven services.<br /><span className="text-steel-500">One Cebu-based crew.</span></h2></div><p className="max-w-sm text-base leading-relaxed text-neutral-600">We bring practical expertise and dependable service to every project, big or small.</p></div><div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{services.map(({ icon: Icon, title, text }) => <article key={title} className="group rounded-md border border-border bg-white p-6 transition hover:-translate-y-1 hover:border-steel-500/40 hover:shadow-xl hover:shadow-ink-900/5"><div className="flex h-11 w-11 items-center justify-center rounded-sm bg-ink-900 text-copper-400"><Icon size={21} strokeWidth={1.6} /></div><h3 className="mt-8 font-display text-2xl font-semibold">{title}</h3><p className="mt-2 min-h-12 text-sm leading-relaxed text-neutral-600">{text}</p><a href="#contact" className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-steel-600 transition group-hover:text-copper-600">Learn more <ArrowUpRight size={15} /></a></article>)}</div></div></section>
-
-      <section id="gallery" className="bg-white py-24 sm:py-32"><div className="mx-auto max-w-[1240px] px-5 sm:px-8 lg:px-12"><div className="max-w-xl"><p className="eyebrow">Our work</p><h2 className="mt-3 font-display text-5xl font-bold leading-none tracking-tight sm:text-6xl">See the job<br /><span className="text-steel-500">done right.</span></h2></div><Carousel opts={{ loop: true }} className="mt-14"><CarouselContent>{galleryPhotos.map((src, i) => <CarouselItem key={src} className="sm:basis-1/2 lg:basis-1/3"><div className="aspect-[4/3] overflow-hidden rounded-md bg-mist-100"><img src={src} alt={`CBVT technicians installing and servicing an air conditioning unit ${i + 1}`} className="h-full w-full object-cover" /></div></CarouselItem>)}</CarouselContent><CarouselPrevious className="static ml-0 mr-2 mt-6 translate-y-0" /><CarouselNext className="static mt-6 translate-y-0" /></Carousel></div></section>
+      <section id="services" className="relative overflow-hidden bg-ink-900">
+        <Carousel opts={{ loop: true }} className="relative">
+          <CarouselContent className="ml-0">
+            {services.map(({ icon: Icon, title, text, image }, i) => (
+              <CarouselItem key={title} className="basis-full pl-0">
+                <div className="relative flex min-h-[720px] items-end overflow-hidden bg-ink-900 pb-16 pt-36 sm:min-h-[800px] sm:pb-24 lg:min-h-[850px] lg:pb-28">
+                  <div className="absolute inset-0 [clip-path:polygon(0_0,100%_0,100%_100%,0_100%)] sm:[clip-path:polygon(12%_0,100%_0,100%_100%,38%_100%)]">
+                    <img src={image} alt={`${title} — CBVT HVAC service`} className="h-full w-full object-cover object-center" />
+                    <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(15,40,81,.97)_0%,rgba(15,40,81,.8)_28%,rgba(15,40,81,.35)_50%,rgba(15,40,81,0)_72%)]" />
+                  </div>
+                  <div className="relative mx-auto w-full max-w-[1240px] px-5 sm:px-8 lg:px-12">
+                    <div className="max-w-xl">
+                      <div className="mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[.22em] text-copper-400">
+                        <span className="h-px w-8 bg-copper-400" />
+                        What we do — {String(i + 1).padStart(2, "0")} / {String(services.length).padStart(2, "0")}
+                      </div>
+                      <div className="flex h-12 w-12 items-center justify-center rounded-sm bg-copper-600 text-white">
+                        <Icon size={22} strokeWidth={1.6} />
+                      </div>
+                      <h2 className="mt-6 font-display text-5xl font-bold leading-[.95] tracking-tight text-white sm:text-6xl lg:text-7xl">{title}</h2>
+                      <p className="mt-5 max-w-md text-lg leading-relaxed text-white/75">{text}</p>
+                      <a href="#contact" className="group mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-copper-600 px-7 py-4 text-sm font-bold text-white transition hover:bg-copper-400">Book this service <ArrowUpRight size={17} className="transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></a>
+                    </div>
+                  </div>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="left-6 top-1/2 h-11 w-11 -translate-y-1/2 border-white/40 bg-transparent text-white hover:border-white hover:bg-white/10 hover:text-white sm:left-10" />
+          <CarouselNext className="right-6 top-1/2 h-11 w-11 -translate-y-1/2 border-white/40 bg-transparent text-white hover:border-white hover:bg-white/10 hover:text-white sm:right-10" />
+        </Carousel>
+      </section>
 
       <section id="why-us" className="bg-porcelain py-24 sm:py-32"><div className="mx-auto grid max-w-[1240px] items-center gap-14 px-5 sm:px-8 lg:grid-cols-[.95fr_1.05fr] lg:gap-24 lg:px-12"><div className="relative">{/* Brand panel in place of stock photography — real jobsite photography is a follow-up per STYLE_GUIDE.md §06/§08 */}<div className="flex aspect-[4/5] w-full items-center justify-center rounded-md bg-ink-900"><div className="flex h-56 w-56 items-center justify-center rounded-full bg-porcelain p-9 shadow-xl sm:h-72 sm:w-72"><img src="/logo.svg" alt="CBVT logo" className="h-full w-full" /></div></div><div className="absolute -bottom-7 -right-4 flex max-w-[230px] items-center gap-3 rounded-sm bg-copper-600 p-5 text-white shadow-xl sm:-right-7"><span className="font-display text-4xl font-bold">15+</span><span className="text-xs font-semibold leading-tight text-white/85">years of keeping<br />Cebu comfortable</span></div></div><div><p className="eyebrow">Why CBVT</p><h2 className="mt-3 font-display text-5xl font-bold leading-[.96] tracking-tight sm:text-6xl">The cool,<br /><span className="text-steel-500">local choice.</span></h2><p className="mt-7 text-lg leading-relaxed text-neutral-600">Good service is more than fixing a unit. It's showing up when you say you will, doing the job properly, and leaving people with peace of mind.</p><div className="mt-9 grid gap-5 sm:grid-cols-2"><div className="border-t border-border pt-4"><ShieldCheck className="text-copper-600" size={23} strokeWidth={1.7} /><h3 className="mt-3 font-display text-xl font-semibold">Built on trust</h3><p className="mt-1 text-sm leading-relaxed text-neutral-600">Straightforward advice, transparent pricing, no shortcuts.</p></div><div className="border-t border-border pt-4"><Wrench className="text-copper-600" size={23} strokeWidth={1.7} /><h3 className="mt-3 font-display text-xl font-semibold">Made to last</h3><p className="mt-1 text-sm leading-relaxed text-neutral-600">Quality workmanship and parts that stand up to daily use.</p></div></div><a href="#about" className="mt-9 inline-flex items-center gap-2 rounded-full bg-ink-900 px-6 py-3.5 text-sm font-bold text-white transition hover:bg-ink-700">Meet the team <ArrowUpRight size={16} /></a></div></div></section>
 
